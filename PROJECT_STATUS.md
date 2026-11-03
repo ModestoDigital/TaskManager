@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 2 — completed.
+Phase 3 — completed.
 
 ## Completed
 
@@ -16,6 +16,8 @@ Phase 2 — completed.
 - Created the Next.js App Router scaffold, strict TypeScript, ESLint, Vitest, a tRPC HTTP handler, a client provider, and a QueryClient factory.
 - Implemented Task domain types, Zod input schemas, the process-shared in-memory repository, synchronous task service, stable cursor pagination, and all required `task.*` tRPC procedures.
 - Added unit and router-integration tests for validation, CRUD, `NOT_FOUND`, invalid cursors, stable pagination, cursor deletion, and update/delete ordering.
+- Implemented the dynamic server-rendered task list with TanStack Query hydration, accessible create/edit forms, direct deletion, loading and error states, and cache invalidation after mutations.
+- Added jsdom and Testing Library support with component tests for the list empty state and invalid form submission.
 
 ## Pending
 
@@ -31,7 +33,7 @@ Phase 2 — completed.
 
 ## Latest validation
 
-2026-11-03: `npm run lint`, `npm run typecheck`, `npm run test`, and `npm run build` all passed. The test suite contains 17 tests across schemas, repository, service, and tRPC router integration.
+2026-11-03: `npm run lint`, `npm run typecheck`, `npm run test`, and `npm run build` all passed. The test suite contains 19 tests across schemas, repository, service, tRPC router integration, and components.
 
 ## Known issues
 
@@ -39,4 +41,4 @@ The concrete SSR prefetch/hydration implementation is deferred to the list route
 
 ## Recommended next action
 
-Start Phase 3 with the accessible UI composition and server-rendered task list.
+Optionally start Phase 4 and add Infinite Scroll only after reviewing the complete CRUD experience manually.
