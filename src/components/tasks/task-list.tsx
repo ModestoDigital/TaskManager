@@ -32,14 +32,21 @@ export function TaskList() {
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
-    if (!sentinel || !hasNextPage || isFetchingNextPage) return;
+    if (
+      !sentinel ||
+      !hasNextPage ||
+      isFetchingNextPage ||
+      taskList.isFetchNextPageError
+    ) {
+      return;
+    }
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) void fetchNextPage();
     });
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, taskList.isFetchNextPageError]);
 
   if (taskList.isLoading) {
     return <p role="status">Loading tasks…</p>;
