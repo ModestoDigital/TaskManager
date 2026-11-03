@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 1 — completed.
+Phase 2 — completed.
 
 ## Completed
 
@@ -13,7 +13,9 @@ Phase 1 — completed.
 - Layered testing strategy documented in `docs/architecture/testing.md` and incorporated into task acceptance criteria.
 - Concurrency, pagination, and idempotency limits documented in `docs/architecture/concurrency.md`; Redis and a container were rejected for the current scope.
 - Stable versions selected for the foundation: Next.js 16.4.5, React 19.3.1, tRPC 11.23.0, TanStack Query 5.105.3, Zod 4.6.7, TypeScript 5.9.3, and Vitest 5.1.0.
-- Created the Next.js App Router scaffold, strict TypeScript, ESLint, Vitest, a tRPC HTTP handler, a client provider, a QueryClient factory, and a tested health procedure.
+- Created the Next.js App Router scaffold, strict TypeScript, ESLint, Vitest, a tRPC HTTP handler, a client provider, and a QueryClient factory.
+- Implemented Task domain types, Zod input schemas, the process-shared in-memory repository, synchronous task service, stable cursor pagination, and all required `task.*` tRPC procedures.
+- Added unit and router-integration tests for validation, CRUD, `NOT_FOUND`, invalid cursors, stable pagination, cursor deletion, and update/delete ordering.
 
 ## Pending
 
@@ -29,7 +31,7 @@ Phase 1 — completed.
 
 ## Latest validation
 
-2026-11-03: `npm run lint`, `npm run typecheck`, `npm run test`, and `npm run build` all passed. The test suite contains one tRPC router smoke test.
+2026-11-03: `npm run lint`, `npm run typecheck`, `npm run test`, and `npm run build` all passed. The test suite contains 17 tests across schemas, repository, service, and tRPC router integration.
 
 ## Known issues
 
@@ -37,4 +39,4 @@ The concrete SSR prefetch/hydration implementation is deferred to the list route
 
 ## Recommended next action
 
-Start Phase 2 with domain types and Zod schemas.
+Start Phase 3 with the accessible UI composition and server-rendered task list.
