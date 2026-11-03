@@ -45,7 +45,7 @@ export function TaskList() {
     return <p role="status">Loading tasks…</p>;
   }
 
-  if (taskList.error) {
+  if (taskList.isError && !taskList.data) {
     return <p role="alert">{taskList.error.message}</p>;
   }
 
@@ -83,6 +83,14 @@ export function TaskList() {
       )}
       <div ref={sentinelRef} aria-hidden="true" />
       {taskList.isFetchingNextPage ? <p role="status">Loading more tasks…</p> : null}
+      {taskList.isFetchNextPageError ? (
+        <div role="alert">
+          <p>Unable to load more tasks.</p>
+          <button type="button" onClick={() => void taskList.fetchNextPage()}>
+            Retry loading more tasks
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 }

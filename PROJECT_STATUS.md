@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 4 — completed.
+Phase 5 — completed.
 
 ## Completed
 
@@ -19,6 +19,8 @@ Phase 4 — completed.
 - Implemented the dynamic server-rendered task list with TanStack Query hydration, accessible create/edit forms, direct deletion, loading and error states, and cache invalidation after mutations.
 - Added jsdom and Testing Library support with component tests for the list empty state and invalid form submission.
 - Added cursor-based Infinite Scroll with `useInfiniteQuery`, `IntersectionObserver`, request de-duplication through TanStack Query, and server-prefetched first-page hydration.
+- Completed the README with setup, commands, procedures, SSR behavior, limitations, and architecture references.
+- Preserved loaded pages when a later Infinite Scroll request fails and added an explicit retry action.
 
 ## Pending
 
@@ -42,4 +44,4 @@ The concrete SSR prefetch/hydration implementation is deferred to the list route
 
 ## Recommended next action
 
-Start Phase 5: complete the README, perform final scenario review, and document the delivery commands and known limitations.
+The implementation is ready for final review and delivery.
