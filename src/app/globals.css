@@ -1,6 +1,8 @@
 :root {
   color-scheme: light;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f7fb;
+  color: #172033;
 }
 
 * {
@@ -9,12 +11,156 @@
 
 body {
   margin: 0;
-  background: #f8fafc;
-  color: #0f172a;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, #dce9ff 0, transparent 34rem),
+    #f4f7fb;
 }
 
 main {
-  width: min(100% - 2rem, 70rem);
+  width: min(100% - 2rem, 52rem);
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 4rem 0;
+}
+
+a {
+  color: #3159bd;
+  font-weight: 650;
+  text-underline-offset: 0.18em;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 0.65rem;
+  background: #3159bd;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+button:hover:not(:disabled) {
+  background: #244795;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.55rem;
+  background: #fff;
+  color: inherit;
+  padding: 0.72rem 0.8rem;
+}
+
+input:focus,
+textarea:focus,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #9db8ff;
+  outline-offset: 2px;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.task-list,
+.task-page {
+  border: 1px solid #e0e7f0;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 1rem 3rem rgba(36, 57, 92, 0.1);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.task-list__header {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  color: #63708a;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.055em;
+  line-height: 1;
+  margin: 0;
+}
+
+.primary-link {
+  border-radius: 0.65rem;
+  background: #3159bd;
+  color: #fff;
+  padding: 0.72rem 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.task-list ul {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task-card {
+  border: 1px solid #e5eaf2;
+  border-radius: 0.85rem;
+  background: #fff;
+  padding: 1.1rem;
+}
+
+.task-card h2 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.task-card__description { color: #4e5c74; margin: 0.65rem 0; }
+.task-card__date { color: #6c7890; font-size: 0.85rem; margin: 0 0 1rem; }
+.task-card__actions { align-items: center; display: flex; flex-wrap: wrap; gap: 0.85rem; }
+.task-card__delete { background: #fff; border: 1px solid #efb2b9; color: #b4233d; }
+.task-card__delete:hover:not(:disabled) { background: #fff1f2; color: #8f1930; }
+.task-card__delete-icon { height: 1rem; width: 1rem; }
+
+.empty-state { color: #5b6880; padding: 2rem 0; text-align: center; }
+.back-link { display: inline-block; margin-bottom: 2rem; }
+.task-page h1 { margin-bottom: 2rem; }
+
+.task-form { display: grid; gap: 1.2rem; }
+.task-form__field { display: grid; gap: 0.45rem; }
+.task-form label { color: #33415c; font-size: 0.9rem; font-weight: 750; }
+.task-form__error { color: #b4233d; font-size: 0.9rem; margin: 0; }
+.task-form button { justify-self: start; }
+
+@media (max-width: 38rem) {
+  main { padding: 1rem 0; }
+  .task-list, .task-page { border-radius: 0.9rem; }
+  .task-list__header { align-items: stretch; flex-direction: column; }
+  .primary-link { text-align: center; }
 }

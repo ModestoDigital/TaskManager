@@ -59,30 +59,50 @@ export function TaskList() {
   const tasks = taskList.data?.pages.flatMap((page) => page.items) ?? [];
 
   return (
-    <section aria-labelledby="task-list-title">
-      <div>
+    <section className="task-list" aria-labelledby="task-list-title">
+      <div className="task-list__header">
+        <div>
+          <p className="eyebrow">Your workspace</p>
         <h1 id="task-list-title">Tasks</h1>
-        <Link href="/tasks/new">Create task</Link>
+        </div>
+        <Link className="primary-link" href="/tasks/new">Create task</Link>
       </div>
       {deleteTask.error ? <p role="alert">{deleteTask.error.message}</p> : null}
       {tasks.length === 0 ? (
-        <p>No tasks yet. Create your first task.</p>
+        <p className="empty-state">No tasks yet. Create your first task.</p>
       ) : (
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>
-              <article>
+              <article className="task-card">
                 <h2>{task.titulo}</h2>
-                {task.descricao ? <p>{task.descricao}</p> : null}
-                <p>Created {dateFormatter.format(new Date(task.dataCriacao))}</p>
-                <Link href={`/tasks/${task.id}/edit`}>Edit {task.titulo}</Link>
+                {task.descricao ? <p className="task-card__description">{task.descricao}</p> : null}
+                <p className="task-card__date">Created {dateFormatter.format(new Date(task.dataCriacao))}</p>
+                <div className="task-card__actions">
+                <Link href={`/tasks/${task.id}/edit`}>Edit task</Link>
                 <button
+                  className="task-card__delete"
                   type="button"
                   onClick={() => deleteTask.mutate({ id: task.id })}
                   disabled={deleteTask.isPending}
                 >
-                  {deleteTask.isPending ? 'Deleting…' : `Delete ${task.titulo}`}
+                  <svg
+                    aria-hidden="true"
+                    className="task-card__delete-icon"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M4 7h16m-10 4v6m4-6v6M9 7l1-3h4l1 3m-8 0 1 13h8l1-13"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.8"
+                    />
+                  </svg>
+                  {deleteTask.isPending ? ' Deleting…' : ' Delete'}
                 </button>
+                </div>
               </article>
             </li>
           ))}

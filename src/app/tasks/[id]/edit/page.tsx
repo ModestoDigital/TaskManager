@@ -5,8 +5,8 @@ export default async function EditTaskPage({ params }: { params: Promise<{ id: s
   const { id } = await params;
 
   return (
-    <main>
-      <Link href="/">Back to tasks</Link>
+    <main className="task-page">
+      <Link className="back-link" href="/">← Back to tasks</Link>
       <h1>Edit task</h1>
       <TaskEditForm id={id} />
     </main>

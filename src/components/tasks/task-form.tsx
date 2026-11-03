@@ -53,8 +53,8 @@ export function TaskForm({ task }: TaskFormProps) {
   }
 
   return (
-    <form onSubmit={submit} noValidate>
-      <div>
+    <form className="task-form" onSubmit={submit} noValidate>
+      <div className="task-form__field">
         <label htmlFor="task-title">Title</label>
         <input
           id="task-title"
@@ -63,9 +63,9 @@ export function TaskForm({ task }: TaskFormProps) {
           onChange={(event) => setTitulo(event.target.value)}
           aria-describedby={validationError ? 'task-title-error' : undefined}
         />
-        {validationError ? <p id="task-title-error" role="alert">{validationError}</p> : null}
+        {validationError ? <p className="task-form__error" id="task-title-error" role="alert">{validationError}</p> : null}
       </div>
-      <div>
+      <div className="task-form__field">
         <label htmlFor="task-description">Description</label>
         <textarea
           id="task-description"
@@ -74,7 +74,7 @@ export function TaskForm({ task }: TaskFormProps) {
           onChange={(event) => setDescricao(event.target.value)}
         />
       </div>
-      {mutation.error ? <p role="alert">{mutation.error.message}</p> : null}
+      {mutation.error ? <p className="task-form__error" role="alert">{mutation.error.message}</p> : null}
       <button type="submit" disabled={mutation.isPending}>
         {mutation.isPending ? 'Saving…' : task ? 'Save changes' : 'Create task'}
       </button>
