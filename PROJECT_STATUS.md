@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Pre-Phase 1 — initial architecture documented; there is still no application or installed dependency.
+Phase 1 — completed.
 
 ## Completed
 
@@ -12,11 +12,11 @@ Pre-Phase 1 — initial architecture documented; there is still no application o
 - Build roadmap created in `docs/ROADMAP.md`, with 16 tasks, dependencies, and acceptance criteria.
 - Layered testing strategy documented in `docs/architecture/testing.md` and incorporated into task acceptance criteria.
 - Concurrency, pagination, and idempotency limits documented in `docs/architecture/concurrency.md`; Redis and a container were rejected for the current scope.
+- Stable versions selected for the foundation: Next.js 16.4.5, React 19.3.1, tRPC 11.23.0, TanStack Query 5.105.3, Zod 4.6.7, TypeScript 5.9.3, and Vitest 5.1.0.
+- Created the Next.js App Router scaffold, strict TypeScript, ESLint, Vitest, a tRPC HTTP handler, a client provider, a QueryClient factory, and a tested health procedure.
 
 ## Pending
 
-- Check current official documentation and compatibility between Next.js App Router, tRPC, and TanStack Query.
-- Create the project and configure TypeScript strict mode, ESLint, Vitest, and the minimum tRPC integration.
 - Implement domain, backend, UI, SSR, and only after the CRUD is validated, Infinite Scroll.
 
 ## Key decisions
@@ -29,12 +29,12 @@ Pre-Phase 1 — initial architecture documented; there is still no application o
 
 ## Latest validation
 
-Not applicable: there is no code, dependency, test, lint, typecheck, or build configuration yet.
+2026-11-03: `npm run lint`, `npm run typecheck`, `npm run test`, and `npm run build` all passed. The test suite contains one tRPC router smoke test.
 
 ## Known issues
 
-None. The concrete SSR integration will be defined after checking stable versions and official documentation in Phase 1.
+The concrete SSR prefetch/hydration implementation is deferred to the list route in Phase 3; it will use the App Router integration selected in Phase 1.
 
 ## Recommended next action
 
-Start Phase 1: select compatible stable versions, create the Next.js scaffold, and configure the minimum tRPC infrastructure without implementing the domain yet.
+Start Phase 2 with domain types and Zod schemas.
