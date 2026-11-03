@@ -24,14 +24,16 @@ export const taskIdInputSchema = z.object({
   id: z.uuid(),
 });
 
-export const listTasksInputSchema = z.preprocess(
-  (value) => value ?? {},
-  z.object({
+export const listTasksInputSchema = z
+  .object({
     cursor: z.string().min(1).optional(),
     limit: z.number().int().min(1).max(50).default(20),
-  }),
-);
+  })
+  .optional();
 
 export type CreateTaskInput = z.infer<typeof createTaskInputSchema>;
 export type UpdateTaskInput = z.infer<typeof updateTaskInputSchema>;
-export type ListTasksInput = z.infer<typeof listTasksInputSchema>;
+export type ListTasksInput = {
+  cursor?: string;
+  limit: number;
+};

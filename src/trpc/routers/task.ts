@@ -29,7 +29,7 @@ export function createTaskRouter(service: TaskService) {
     create: baseProcedure.input(createTaskInputSchema).mutation(({ input }) => service.create(input)),
     list: baseProcedure.input(listTasksInputSchema).query(({ input }) => {
       try {
-        return service.list(input);
+        return service.list(input ?? { limit: 20 });
       } catch (error) {
         return mapTaskError(error);
       }

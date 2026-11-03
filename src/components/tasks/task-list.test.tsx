@@ -7,9 +7,11 @@ vi.mock('@/trpc/client', () => ({
   useTRPC: () => ({
     task: {
       list: {
-        queryOptions: () => ({
+        infiniteQueryOptions: () => ({
           queryKey: ['task', 'list'],
           queryFn: async () => ({ items: [] }),
+          initialPageParam: undefined,
+          getNextPageParam: () => undefined,
         }),
       },
       delete: {

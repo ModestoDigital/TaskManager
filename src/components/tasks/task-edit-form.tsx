@@ -13,7 +13,13 @@ export function TaskEditForm({ id }: { id: string }) {
   }
 
   if (taskQuery.error) {
-    return <p role="alert">Task not found.</p>;
+    return (
+      <p role="alert">
+        {taskQuery.error.data?.code === 'NOT_FOUND'
+          ? 'Task not found.'
+          : 'Unable to load the task. Please try again.'}
+      </p>
+    );
   }
 
   return taskQuery.data ? <TaskForm task={taskQuery.data} /> : null;

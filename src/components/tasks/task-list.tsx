@@ -1,7 +1,8 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 import { useTRPC } from '@/trpc/client';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -13,7 +14,14 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 export function TaskList() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const taskList = useQuery(trpc.task.list.queryOptions({ limit: 20 }));
+  const taskList = useInfiniteQuery(
+    trpc.task.list.infiniteQueryOptions(
+      { limit: 20 },
+      { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    ),
+  );
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = taskList;
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const deleteTask = useMutation(
     trpc.task.delete.mutationOptions({
       onSuccess: async () => {
@@ -21,6 +29,17 @@ export function TaskList() {
       },
     }),
   );
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void fetchNextPage();
+    });
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   if (taskList.isLoading) {
     return <p role="status">Loading tasks…</p>;
@@ -30,7 +49,7 @@ export function TaskList() {
     return <p role="alert">{taskList.error.message}</p>;
   }
 
-  const tasks = taskList.data?.items ?? [];
+  const tasks = taskList.data?.pages.flatMap((page) => page.items) ?? [];
 
   return (
     <section aria-labelledby="task-list-title">
@@ -62,6 +81,8 @@ export function TaskList() {
           ))}
         </ul>
       )}
+      <div ref={sentinelRef} aria-hidden="true" />
+      {taskList.isFetchingNextPage ? <p role="status">Loading more tasks…</p> : null}
     </section>
   );
 }

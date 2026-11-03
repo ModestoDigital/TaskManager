@@ -5,7 +5,12 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const queryClient = getQueryClient();
-  await queryClient.fetchQuery(trpc.task.list.queryOptions({ limit: 20 }));
+  await queryClient.fetchInfiniteQuery(
+    trpc.task.list.infiniteQueryOptions(
+      { limit: 20 },
+      { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    ),
+  );
 
   return (
     <main>
